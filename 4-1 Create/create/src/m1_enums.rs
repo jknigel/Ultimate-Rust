@@ -35,9 +35,9 @@ fn check_under_five(num_check:u8) -> GivenResult<u8, String> {
 //This function uses built-in result, no need define enum
 fn check_under_five_built_in(num_check:u8) -> Result<u8, String> {
     if num_check < 5 {
-        return Result::Ok(num_check)
+        return Ok(num_check)
     } else {
-        return Result::Err("Not under 5!".to_string())
+        return Err("Not under 5!".to_string())
     }
 }
 
