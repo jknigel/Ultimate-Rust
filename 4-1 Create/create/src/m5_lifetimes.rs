@@ -85,3 +85,56 @@ fn example_3() {
         }
     }
 }
+
+fn example_4_generics() {
+
+    //Allocate space in memory
+    let highest_age:&i32;
+
+    //Initialize variables
+    let alice_age:i32 = 20;
+    let bob_age:i32 = 22;
+
+    //Call function
+    highest_age = largest(&alice_age, &bob_age);
+
+    //print output
+    println!("Highest age is {}", highest_age);
+
+    fn largest<'a, T:PartialOrd>(compare_1:&'a T, compare_2:&'a T) -> &'a T {
+        if compare_1 > compare_2 {
+            return compare_1
+        } else {
+            return compare_2
+        }
+    }
+}
+
+struct Person<'p> {
+    name:&'p str,
+    points: &'p f32
+}
+
+fn example_5_struct() {
+
+    //Allocate space in memory
+    let highest_age:&f32;
+
+    //Initialize variables
+    let alice:Person = Person {name: "Alice", points: &50.2};
+    let bob:Person = Person {name: "Bob", points: &40.5};
+
+    //Call function
+    highest_age = largest::<f32>(alice.points, bob.points);
+
+    //print output
+    println!("Highest age is {}", highest_age);
+
+    fn largest<'a, T:PartialOrd>(compare_1:&'a T, compare_2:&'a T) -> &'a T {
+        if compare_1 > compare_2 {
+            return compare_1
+        } else {
+            return compare_2
+        }
+    }
+}
