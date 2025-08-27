@@ -1,8 +1,46 @@
+enum Message {
+    Quit,
+    ChangeColour(i32,i32,i32),
+    Move {x:i32, y:i32},
+    Write(String)
+}
+
+fn process_message(msg:Message) {
+    match msg {
+        Message::Quit => {
+            println!("I quit!");
+        },
+        Message::ChangeColour(red, blue, green) => {
+            println!("Red {}, Blue {}, Green {}", red, blue, green);
+        },
+        Message::Move {x, y:new_name} => {
+            println!("X is {}, Y as new_name is {}", x, new_name);
+        },
+        Message::Write(text) => {
+            println!("{}", text);
+        }
+    };
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
+    fn tests_large_enum() {
+        let my_quit:Message = Message::Quit;
+        process_message(my_quit);
+
+        let my_colour:Message = Message::ChangeColour(10,50,88);
+        process_message(my_colour);
+
+        let my_move:Message = Message::Move{x:88, y:188};
+        process_message(my_move);
+
+        let my_write:Message = Message::Write("My awesome Rust!".to_string());
+        process_message(my_write);
+    }
+
     fn tests_match_literals() {
         let number: i32 = 20;
 
@@ -83,5 +121,32 @@ mod test {
             panic!("There is a BIG problem!");
         };
         println!("My int = {}", my_int);
+    }
+
+    #[test]
+    fn tests_match_guard() {
+        let pair:(i32,i32) = (2,-2);
+        match pair {
+            (x,y) if x==y => println!("They match!"),
+            (x,y) if x+y==0 => println!("They neutralize"),
+            (_,y) if y==2 =>println!("Y is indeed +2"),
+            _ => println!("We don't care!")
+        };
+    }
+
+    #[test]
+    fn tests_match_struct() {
+        struct Location {
+            x:i32,
+            y:i32
+        }
+
+        let my_location:Location = Location{x:0,y:128};
+
+        match my_location {
+            Location{x,y:0} => println!("Y is on the axis"),
+            Location{x:0,y} => println!("X is on the axis"),
+            Location{x,y} => println!("X and Y are not on the axis"),
+        };
     }
 }
