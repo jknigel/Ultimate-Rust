@@ -20,15 +20,15 @@ mod tests {
     use super::*;
 
     #[tokio::test]
-    async fn tests_calls_async_fn2() {
+    async fn tests_calls_async_v2_fn() {
         let api_url:&str = "https://pokeapi.co/api/v2/pokemon/ditto";
-        let my_res:Result<serde_json::Value, Error> = my_async_call(api_url).await;
+        let my_res:Result<serde_json::Value, std::io::Error> = my_async_call(api_url).await;
         match my_res {
             Ok(r) => {
                 dbg!(r);
             },
-            Err(_) => {
-                panic!("Failed to make request");
+            Err(e) => {
+                panic!("{}", e);
             }
         }
     }
