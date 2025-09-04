@@ -1,0 +1,8 @@
+[package]
+name = "my_proc_mac"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tokio = { version="1.28.2", features = ["full"] }
+my_proc_macro = { path = "/workspaces/Ultimate-Rust/5-1 Procedural Macros/my_proc_mac/my_proc_macro" }
