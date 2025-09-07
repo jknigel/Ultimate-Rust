@@ -42,8 +42,12 @@ mod test {
         let b:Rc<RefCell<i32>> = Rc::clone(&a);
 
         *a.borrow_mut() = 100; //can use *b.borrow_mut() as well
-        dbg!(a);
-        dbg!(b);
+        dbg!(&a);//&a is used if we want to still use a because dbg takes ownership of the variable.
+        dbg!(&b);
+
+        *b.borrow_mut() = 100; //can use *b.borrow_mut() as well
+        dbg!(&a);
+        dbg!(&b);
 
     }
 }
